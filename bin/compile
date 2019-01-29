@@ -4,9 +4,6 @@
 # fail fast
 set -e
 
-# echo "ejecutando mod_rewrite"
-# a2enmod mod_rewrite
-
 # config
 APACHE_VERSION="2.4.2"
 APACHE_PATH="apache"
@@ -31,6 +28,10 @@ fi
 APACHE_URL="https://s3.amazonaws.com/cga-buildpack/apache-$APACHE_VERSION.tar.gz"
 echo "-----> Bundling Apache version $APACHE_VERSION"
 curl --silent --max-time 60 --location "$APACHE_URL" | tar xz
+
+
+echo "ejecutando mod_rewrite"
+a2enmod mod_rewrite
 
 # update config files
 cp $LP_DIR/conf/httpd.conf $APACHE_PATH/conf
